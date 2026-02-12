@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUMAN_OS // DATABASE</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- EXACT SAME THEME AS DASHBOARD --- */
+        :root {
+            --bg: #0f0f0f;
+            --paper: #1a1a1a;
+            --text: #cfcfcf;
+            --heading: #ffffff;
+            --red: #ff3333;
+            --yellow: #f1c40f;
+            --blue: #3498db; /* Human_OS Specific Color */
+            --border: #333;
+            --shadow: rgba(0,0,0,0.5);
+        }
+
+        [data-theme="light"] {
+            --bg: #e0e0e0;
+            --paper: #f4f1ea;
+            --text: #2c2c2c;
+            --heading: #000000;
+            --red: #c0392b;
+            --yellow: #d35400;
+            --blue: #2980b9;
+            --border: #b0a89e;
+            --shadow: rgba(0,0,0,0.1);
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            color: var(--text);
+            font-family: 'Courier Prime', monospace;
+            padding: 20px;
+            margin: 0;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* --- NAVIGATION --- */
+        .nav-bar {
+            border-bottom: 2px dashed var(--border);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .back-btn {
+            color: var(--blue);
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--blue);
+            padding: 8px 15px;
+            transition: 0.2s;
+        }
+        .back-btn:hover { background: var(--blue); color: var(--bg); }
+
+        /* --- HEADER --- */
+        header { text-align: center; margin-bottom: 50px; }
+        
+        h1 {
+            font-family: 'Special Elite', cursive;
+            font-size: 3rem;
+            color: var(--heading);
+            margin: 0;
+            text-shadow: 2px 2px 0px var(--border);
+        }
+        
+        .subtitle { color: var(--blue); letter-spacing: 2px; font-weight: bold; margin-top: 10px; }
+
+        /* --- GRID --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* --- CARD STYLE (Same as Index) --- */
+        .case-file {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            padding: 25px;
+            position: relative;
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 15px var(--shadow);
+            border-left: 5px solid var(--blue); /* Blue strip for Human_OS */
+        }
+
+        .case-file:hover {
+            transform: translateY(-5px);
+            border-color: var(--heading);
+            background: var(--paper);
+            z-index: 5;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            color: var(--blue);
+        }
+
+        h2 { margin: 0 0 10px 0; font-size: 1.4rem; color: var(--heading); }
+        
+        .excerpt {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text);
+            opacity: 0.9;
+        }
+
+        /* Lock Icon for unavailable files */
+        .locked { opacity: 0.5; cursor: not-allowed; }
+
+    </style>
+</head>
+<body>
+
+    <div class="nav-bar">
+        <a href="../index.html" class="back-btn">< BACK TO DASHBOARD</a>
+        <div style="font-weight:bold; color:var(--text);">SECURE CONNECTION ESTABLISHED</div>
+    </div>
+
+    <header>
+        <h1>HUMAN_OS</h1>
+        <div class="subtitle">SUBJECT: BODY LANGUAGE DECODING</div>
+    </header>
+
+    <div class="grid">
+
+        <a href="lying.html" class="case-file">
+            <span class="tag">CASE #001 // DECEPTION</span>
+            <h2>The Judas Signal</h2>
+            <div class="excerpt">
+                Why the left eyebrow is the only part of the face that cannot be controlled during a lie.
+            </div>
+        </a>
+
+        <a href="eye-contact.html" class="case-file">
+            <span class="tag">CASE #002 // AGGRESSION</span>
+            <h2>The Stare Down</h2>
+            <div class="excerpt">
+                Debunking the myth that liars look away. Why forced eye contact is a red flag.
+            </div>
+        </a>
+
+        <div class="case-file locked">
+            <span class="tag">CASE #003 // LOCKED</span>
+            <h2>The Pacifier Effect</h2>
+            <div class="excerpt">
+                (Access Denied) Creating barriers with hands when feeling insecure.
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+
+</body>
+</html>
