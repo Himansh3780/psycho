@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE BLACK ARCHIVE // DECLASSIFIED</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. THEME VARIABLES --- */
+        :root {
+            /* Dark Mode (Default) */
+            --bg: #0f0f0f;
+            --paper: #1a1a1a;
+            --text: #cfcfcf;
+            --heading: #ffffff;
+            --red: #ff3333;
+            --yellow: #f1c40f;
+            --border: #333;
+            --shadow: rgba(0,0,0,0.5);
+            --noise: 0.05;
+        }
+
+        [data-theme="light"] {
+            /* Light Mode (Classified Paper) */
+            --bg: #e0e0e0;
+            --paper: #f4f1ea; /* Manila Folder Color */
+            --text: #2c2c2c;
+            --heading: #000000;
+            --red: #c0392b;   /* Darker Stamp Red */
+            --yellow: #d35400; /* Burnt Orange */
+            --border: #b0a89e;
+            --shadow: rgba(0,0,0,0.1);
+            --noise: 0.02;
+        }
+
+        body {
+            background-color: var(--bg);
+            /* Noise Texture */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            color: var(--text);
+            font-family: 'Courier Prime', monospace;
+            margin: 0;
+            padding: 0;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* --- 2. HEADER & NAV --- */
+        .top-bar {
+            background: var(--red);
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            padding: 5px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .mode-btn {
+            background: transparent;
+            border: 2px solid var(--text);
+            color: var(--text);
+            padding: 5px 15px;
+            font-family: 'Courier Prime', monospace;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .mode-btn:hover { background: var(--text); color: var(--bg); }
+
+        header {
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .stamp {
+            display: inline-block;
+            border: 3px solid var(--red);
+            color: var(--red);
+            font-family: 'Special Elite', cursive;
+            padding: 5px 15px;
+            font-size: 1.2rem;
+            transform: rotate(-10deg);
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-family: 'Special Elite', cursive;
+            font-size: 3rem;
+            margin: 0;
+            color: var(--heading);
+            text-shadow: 2px 2px 0px var(--border);
+            letter-spacing: -2px;
+        }
+
+        /* --- 3. SEARCH --- */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            background: var(--paper);
+            border: 1px solid var(--border);
+            color: var(--yellow);
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.1rem;
+            padding: 15px 20px;
+            outline: none;
+            box-shadow: 5px 5px 0px var(--shadow);
+            box-sizing: border-box;
+        }
+
+        input:focus { border-color: var(--yellow); }
+
+        /* --- 4. THE 4 MAIN CATEGORIES --- */
+        .section-title {
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            max-width: 1000px;
+            margin: 0 auto 30px;
+            padding-bottom: 10px;
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .cat-card {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            padding: 20px;
+            text-align: center;
+            transition: 0.2s;
+            position: relative;
+        }
+
+        .cat-card:hover {
+            border-color: var(--yellow);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px var(--shadow);
+        }
+
+        .cat-icon { font-size: 2.5rem; display: block; margin-bottom: 10px; }
+        .cat-card h3 { margin: 0; font-size: 1.2rem; color: var(--heading); }
+        .cat-card span { font-size: 0.8rem; color: var(--text); opacity: 0.7; }
+
+        /* --- 5. RECENT FILES GRID --- */
+        .files-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+
+        .case-file {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            padding: 25px;
+            position: relative;
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .case-file:hover {
+            transform: rotate(1deg);
+            border-color: var(--heading);
+            background: var(--paper); /* Ensures contrast in light mode */
+            z-index: 5;
+        }
+
+        /* Paper Clip */
+        .paper-clip {
+            position: absolute;
+            top: -10px; right: 20px;
+            width: 10px; height: 30px;
+            background: #555;
+            border-radius: 10px;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .tag-human { color: #3498db; }
+        .tag-social { color: var(--yellow); }
+        .tag-defense { color: var(--red); }
+        .tag-brain { color: #9b59b6; }
+
+        .case-file h2 {
+            font-size: 1.3rem;
+            margin: 0 0 10px 0;
+            color: var(--heading);
+        }
+
+        .excerpt {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: var(--text);
+            opacity: 0.9;
+            border-left: 2px solid var(--border);
+            padding-left: 10px;
+        }
+
+        /* Mobile Fix */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .category-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* Search Results */
+        #results {
+            display: none;
+            background: var(--paper);
+            border: 1px solid var(--yellow);
+            position: absolute;
+            width: calc(100% - 40px);
+            z-index: 100;
+            top: 55px;
+        }
+        .res-row { padding: 10px; border-bottom: 1px solid var(--border); cursor: pointer; color: var(--text); }
+        .res-row:hover { background: var(--yellow); color: black; font-weight: bold; }
+
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        ⚠️ Warning: Authorized Personnel Only
+    </div>
+
+    <nav>
+        <div style="font-weight:bold;">// VER. 2.0</div>
+        <button class="mode-btn" onclick="toggleTheme()">☀ / 🌙 TOGGLE MODE</button>
+    </nav>
+
+    <header>
+        <div class="stamp">TOP SECRET</div>
+        <h1>THE BLACK ARCHIVE</h1>
+        <div style="margin-top:10px; letter-spacing:2px; font-size:0.9rem;">PSYCHOLOGICAL WARFARE & DEFENSE</div>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="s" placeholder="> Search Database..." onkeyup="search()">
+        <div id="results"></div>
+    </div>
+
+    <div class="section-title">/// SELECT DATABASE CATEGORY ///</div>
+    
+    <div class="category-grid">
+        <a href="human-os/index.html" class="cat-card">
+            <span class="cat-icon">👁️</span>
+            <h3>HUMAN_OS</h3>
+            <span>Body Language</span>
+        </a>
+        <a href="social-eng/index.html" class="cat-card">
+            <span class="cat-icon">🤝</span>
+            <h3>SOCIAL_ENG</h3>
+            <span>Persuasion</span>
+        </a>
+        <a href="defense/index.html" class="cat-card">
+            <span class="cat-icon">🛡️</span>
+            <h3>DEFENSE</h3>
+            <span>Counter-Ops</span>
+        </a>
+        <a href="brain-hacks/index.html" class="cat-card">
+            <span class="cat-icon">🧠</span>
+            <h3>BRAIN_HACKS</h3>
+            <span>Cognitive Bias</span>
+        </a>
+    </div>
+
+    <div class="section-title">/// RECENTLY DECLASSIFIED FILES ///</div>
+
+    <div class="files-grid">
+
+        <a href="human-os/lying.html" class="case-file">
+            <div class="paper-clip"></div>
+            <span class="tag tag-human">HUMAN_OS</span>
+            <h2>The Judas Signal</h2>
+            <div class="excerpt">Detect lies by watching the left eyebrow twitch.</div>
+        </a>
+
+        <a href="social-eng/ben-franklin.html" class="case-file">
+            <div class="paper-clip"></div>
+            <span class="tag tag-social">SOCIAL_ENG</span>
+            <h2>The Favor Paradox</h2>
+            <div class="excerpt">Make enemies like you by asking for a favor.</div>
+        </a>
+
+        <a href="defense/gaslighting.html" class="case-file">
+            <div class="paper-clip"></div>
+            <span class="tag tag-defense">DEFENSE</span>
+            <h2>Anti-Gaslighting</h2>
+            <div class="excerpt">3 verbal shields to protect your reality.</div>
+        </a>
+
+        <a href="brain-hacks/halo-effect.html" class="case-file">
+            <div class="paper-clip"></div>
+            <span class="tag tag-brain">BRAIN_HACKS</span>
+            <h2>The Halo Glitch</h2>
+            <div class="excerpt">How to look smarter by changing your appearance.</div>
+        </a>
+
+    </div>
+
+    <script>
+        // --- 1. THEME SWITCHER LOGIC ---
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            
+            if (current === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        // Remember Theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        // --- 2. SEARCH LOGIC ---
+        const db = [
+            {t: "The Judas Signal (Lying)", u: "human-os/lying.html"},
+            {t: "Ben Franklin Effect", u: "social-eng/ben-franklin.html"},
+            {t: "Gaslighting Defense", u: "defense/gaslighting.html"},
+            {t: "The Halo Effect", u: "brain-hacks/halo-effect.html"}
+        ];
+
+        function search() {
+            let v = document.getElementById('s').value.toLowerCase();
+            let r = document.getElementById('results');
+            let h = "";
+            if (v.length < 2) { r.style.display = 'none'; return; }
+            let m = db.filter(x => x.t.toLowerCase().includes(v));
+            if (m.length > 0) {
+                m.forEach(i => h += `<div class="res-row" onclick="location.href='${i.u}'">> ${i.t}</div>`);
+                r.innerHTML = h; r.style.display = 'block';
+            } else { r.style.display = 'none'; }
+        }
+        document.addEventListener('click', e => {
+            if (!document.querySelector('.search-container').contains(e.target)) 
+                document.getElementById('results').style.display = 'none';
+        });
+    </script>
+
+</body>
+</html>
