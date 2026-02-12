@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CASE FILE: 001 // THE JUDAS SIGNAL</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0f0f0f;
+            --text: #dcdcdc;
+            --accent: #3498db; /* Blue for Human_OS */
+            --red: #ff3333;
+            --yellow: #f1c40f;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Courier Prime', monospace;
+            padding: 30px;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION --- */
+        .top-nav {
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        .back-btn {
+            text-decoration: none;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .back-btn:hover { background: var(--accent); color: black; }
+
+        /* --- HEADER --- */
+        .file-header {
+            position: relative;
+            margin-bottom: 40px;
+            border-bottom: 2px dashed #444;
+            padding-bottom: 20px;
+        }
+
+        .stamp {
+            position: absolute;
+            top: 0; right: 0;
+            border: 3px solid var(--red);
+            color: var(--red);
+            font-family: 'Special Elite', cursive;
+            padding: 5px 10px;
+            font-size: 1.2rem;
+            transform: rotate(-10deg);
+            opacity: 0.8;
+        }
+
+        h1 {
+            font-family: 'Special Elite', cursive;
+            font-size: 2.2rem;
+            margin: 0;
+            color: white;
+            letter-spacing: -1px;
+        }
+
+        .meta {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        /* --- CONTENT STYLING --- */
+        p { margin-bottom: 20px; font-size: 1.05rem; }
+        
+        strong { color: white; }
+
+        /* The Redacted Effect (Interactive) */
+        .redacted {
+            background: black;
+            color: black;
+            cursor: help;
+            padding: 0 4px;
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+        .redacted:hover {
+            background: transparent;
+            color: var(--red);
+            text-decoration: underline;
+        }
+
+        /* Highlight */
+        .highlight {
+            background: var(--yellow);
+            color: black;
+            font-weight: bold;
+            padding: 0 4px;
+        }
+
+        /* The "Mechanism" Box */
+        .mechanism-box {
+            background: #151515;
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            margin: 30px 0;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            color: #444;
+            font-size: 0.8rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <a href="index.html" class="back-btn">< BACK TO HUMAN_OS</a>
+    </div>
+
+    <div class="file-header">
+        <div class="stamp">VERIFIED</div>
+        <h1>THE JUDAS SIGNAL</h1>
+        <div class="meta">
+            CASE ID: #001 &nbsp;|&nbsp; CLEARANCE: LEVEL 3 &nbsp;|&nbsp; TAGS: MICRO-EXPRESSIONS
+        </div>
+    </div>
+
+    <p><strong>SUBJECT:</strong> Detecting High-Stakes Deception.</p>
+
+    <p>Pop culture suggests that liars look away or fidget. <span class="highlight">This is false.</span> Experienced liars will maintain rigid eye contact to "prove" they are telling the truth.</p>
+
+    <p>However, the limbic system (the emotional brain) cannot fully control the upper face during high cognitive load. This results in the <span class="redacted">Left Eyebrow Twitch</span>.</p>
+
+    <div class="mechanism-box">
+        <strong>THE MECHANISM:</strong><br><br>
+        When a person constructs a lie, the brain experiences "Cognitive Dissonance" (conflict between the truth and the story).<br><br>
+        This stress leaks out through the <strong>Corrugator Supercilii</strong> muscle, causing a split-second lift or twitch of the eyebrow, usually on the left side.
+    </div>
+
+    <p><strong>HOW TO DEPLOY:</strong></p>
+    <ul>
+        <li><strong>Step 1:</strong> Ask a baseline question (e.g., "Is your name Himanshu?"). Watch their face. It should be relaxed.</li>
+        <li><strong>Step 2:</strong> Ask the pressure question (e.g., "Did you take the file?").</li>
+        <li><strong>Step 3:</strong> Do not listen to their words. Watch their <span class="highlight">Eyebrows</span>.</li>
+    </ul>
+
+    <p>If the eyebrow twitches up while the rest of the face remains still, the probability of deception is <span class="redacted">above 85%</span>.</p>
+
+    <p><strong>WARNING:</strong> This signal indicates stress, not guilt. Use it as a clue to dig deeper, not as proof.</p>
+
+    <div class="footer">
+        *** END OF FILE // OMNIRULES ARCHIVE ***
+    </div>
+
+</body>
+</html>
