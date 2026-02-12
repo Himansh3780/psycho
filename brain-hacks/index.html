@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRAIN_HACKS // DATABASE</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- THEME: PURPLE (Brain Hacks) --- */
+        :root {
+            --bg: #0f0f0f;
+            --paper: #1a1a1a;
+            --text: #cfcfcf;
+            --heading: #ffffff;
+            --accent: #9b59b6; /* Purple for Brain Hacks */
+            --border: #333;
+            --shadow: rgba(0,0,0,0.5);
+        }
+
+        [data-theme="light"] {
+            --bg: #e0e0e0;
+            --paper: #f4f1ea;
+            --text: #2c2c2c;
+            --heading: #000000;
+            --accent: #8e44ad; /* Darker Purple */
+            --border: #b0a89e;
+            --shadow: rgba(0,0,0,0.1);
+        }
+
+        body {
+            background-color: var(--bg);
+            /* Noise Texture */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            color: var(--text);
+            font-family: 'Courier Prime', monospace;
+            padding: 20px;
+            margin: 0;
+            transition: background 0.3s;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* --- HEADER --- */
+        .nav-bar {
+            border-bottom: 2px dashed var(--border);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .back-btn {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            border: 1px solid var(--accent);
+            padding: 8px 15px;
+        }
+        .back-btn:hover { background: var(--accent); color: var(--bg); }
+
+        header { text-align: center; margin-bottom: 50px; }
+        
+        h1 {
+            font-family: 'Special Elite', cursive;
+            font-size: 3rem;
+            color: var(--heading);
+            margin: 0;
+        }
+        
+        .subtitle { color: var(--accent); letter-spacing: 2px; font-weight: bold; margin-top: 10px; }
+
+        /* --- THE ARTICLE GRID --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .case-file {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            padding: 25px;
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 15px var(--shadow);
+            border-left: 5px solid var(--accent); /* Purple Strip */
+        }
+
+        .case-file:hover {
+            transform: translateY(-5px);
+            border-color: var(--heading);
+            background: var(--paper);
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        h2 { margin: 0 0 10px 0; font-size: 1.4rem; color: var(--heading); }
+        .excerpt { font-size: 0.9rem; line-height: 1.5; color: var(--text); opacity: 0.9; }
+
+    </style>
+</head>
+<body>
+
+    <div class="nav-bar">
+        <a href="../index.html" class="back-btn">< BACK TO DASHBOARD</a>
+    </div>
+
+    <header>
+        <h1>BRAIN_HACKS</h1>
+        <div class="subtitle">SUBJECT: COGNITIVE BIAS EXPLOITS</div>
+    </header>
+
+    <div class="grid">
+
+        <a href="halo-effect.html" class="case-file">
+            <span class="tag">CASE #001 // PERCEPTION</span>
+            <h2>The Halo Glitch</h2>
+            <div class="excerpt">
+                Why attractive or well-dressed people are automatically assumed to be smarter and more trustworthy.
+            </div>
+        </a>
+
+        <a href="#" class="case-file" style="opacity:0.5;">
+            <span class="tag">CASE #002 // LOCKED</span>
+            <h2>The Scarcity Trap</h2>
+            <div class="excerpt">
+                (Access Denied) ...Why "Only 1 Left in Stock" shuts down the logical brain.
+            </div>
+        </a>
+
+    </div>
+
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+
+</body>
+</html>s
