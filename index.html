@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE BLACK ARCHIVE // DECLASSIFIED</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0f0f0f;         /* Void Black */
+            --paper: #1a1a1a;      /* Dark Grey Paper */
+            --text: #cfcfcf;       /* Off-white text */
+            --red: #ff3333;        /* Alert Red */
+            --yellow: #f1c40f;     /* Highlighter Yellow */
+        }
+
+        body {
+            background-color: var(--bg);
+            /* Subtle Noise Texture for Gritty Feel */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            color: var(--text);
+            font-family: 'Courier Prime', monospace;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* --- 1. THE WARNING BANNER --- */
+        .top-bar {
+            background: var(--red);
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            padding: 5px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- 2. HEADER --- */
+        header {
+            max-width: 800px;
+            margin: 60px auto 40px;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .stamp {
+            position: absolute;
+            top: -20px; right: 20px;
+            border: 3px solid var(--red);
+            color: var(--red);
+            font-family: 'Special Elite', cursive;
+            padding: 5px 15px;
+            font-size: 1.2rem;
+            transform: rotate(15deg);
+            opacity: 0.8;
+            z-index: 10;
+        }
+
+        h1 {
+            font-family: 'Special Elite', cursive;
+            font-size: 3.5rem;
+            margin: 0;
+            color: white;
+            text-shadow: 2px 2px 0px #333;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            border-top: 1px solid #444;
+            border-bottom: 1px solid #444;
+            display: inline-block;
+            padding: 10px 30px;
+            margin-top: 20px;
+            color: #888;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- 3. SEARCH (The "Interrogation" Input) --- */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 60px;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        input {
+            width: 100%;
+            background: #000;
+            border: 1px solid #444;
+            color: var(--yellow);
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.1rem;
+            padding: 15px 20px;
+            outline: none;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transition: 0.3s;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border-color: var(--yellow);
+            box-shadow: 0 0 15px rgba(241, 196, 15, 0.2);
+        }
+
+        /* Search Results Dropdown */
+        #results {
+            display: none;
+            background: #111;
+            border: 1px solid var(--yellow);
+            position: absolute;
+            width: calc(100% - 40px);
+            z-index: 100;
+            top: 55px;
+            box-shadow: 0 10px 30px black;
+        }
+        .res-row {
+            padding: 15px;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+        }
+        .res-row:hover {
+            background: var(--yellow);
+            color: black;
+            font-weight: bold;
+        }
+
+        /* --- 4. THE EVIDENCE BOARD (Grid) --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .case-file {
+            background: var(--paper);
+            border: 1px solid #333;
+            padding: 25px;
+            position: relative;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .case-file:hover {
+            transform: translateY(-5px) rotate(1deg);
+            border-color: var(--text);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            background: #222;
+        }
+
+        /* Visual Paper Clip */
+        .paper-clip {
+            position: absolute;
+            top: -10px; right: 20px;
+            width: 10px; height: 30px;
+            background: #555;
+            border-radius: 10px;
+            box-shadow: 1px 1px 2px black;
+        }
+
+        .category-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #555;
+            margin-bottom: 10px;
+            display: block;
+            font-weight: bold;
+        }
+
+        /* Color Coding Categories */
+        .tag-human { color: #3498db; }  /* Blue */
+        .tag-social { color: #f1c40f; } /* Yellow */
+        .tag-defense { color: #ff3333; }/* Red */
+        .tag-brain { color: #9b59b6; }  /* Purple */
+
+        .case-file h2 {
+            font-size: 1.4rem;
+            margin: 0 0 15px 0;
+            color: white;
+            line-height: 1.2;
+        }
+
+        /* Redacted Text Effect */
+        .redacted {
+            background: black;
+            color: black;
+            padding: 0 5px;
+            transition: 0.3s;
+        }
+        .case-file:hover .redacted {
+            background: transparent;
+            color: var(--red);
+            text-decoration: underline;
+        }
+
+        .excerpt {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #999;
+            border-left: 2px solid #444;
+            padding-left: 15px;
+        }
+
+        /* Mobile Fix */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .stamp { font-size: 1rem; top: 10px; right: 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        ⚠️ Warning: Information for Defensive Use Only
+    </div>
+
+    <header>
+        <div class="stamp">TOP SECRET</div>
+        <h1>THE BLACK ARCHIVE</h1>
+        <div class="subtitle">Human_OS // Dark Psychology // Social Engineering</div>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="s" placeholder="> Enter Subject Keywords (e.g. Lying, Power)..." onkeyup="search()">
+        <div id="results"></div>
+    </div>
+
+    <div class="grid">
+
+        <a href="human-os/lying.html" class="case-file">
+            <div class="paper-clip"></div>
+            <span class="category-tag tag-human">Subject: Human_OS</span>
+            <h2>The <span class="redacted">Judas</span> Signal</h2>
+            <div class="excerpt">
+                New research indicates that a specific movement of the left eyebrow often precedes a lie. Learn to spot it before they speak.
+            </div>
+        </a>
+
+        <a href="social-eng/ben-franklin.html" class="case-file">
+            <div class="paper-clip"></div>
+            <span class="category-tag tag-social">Subject: Social_Eng</span>
+            <h2>The <span class="redacted">Favor</span> Paradox</h2>
+            <div class="excerpt">
+                Don't do favors for enemies to make them like you. Ask them to do a favor for YOU. The Ben Franklin Effect explained.
+            </div>
+        </a>
+
+        <a href="defense/gaslighting.html" class="case-file">
+            <div class="paper-clip"></div>
+            <span class="category-tag tag-defense">Subject: Dark_Defense</span>
+            <h2>Countering <span class="redacted">Gaslighting</span></h2>
+            <div class="excerpt">
+                When someone tries to make you question your reality. The 3-step verbal defense technique used by therapists.
+            </div>
+        </a>
+
+        <a href="brain-hacks/halo-effect.html" class="case-file">
+            <div class="paper-clip"></div>
+            <span class="category-tag tag-brain">Subject: Brain_Hacks</span>
+            <h2>The <span class="redacted">Halo</span> Glitch</h2>
+            <div class="excerpt">
+                People automatically assume attractive people are smarter. How to hack your appearance to trigger this bias instantly.
+            </div>
+        </a>
+
+        <a href="social-eng/anchoring.html" class="case-file">
+            <div class="paper-clip"></div>
+            <span class="category-tag tag-social">Subject: Social_Eng</span>
+            <h2>The <span class="redacted">Anchor</span> Trap</h2>
+            <div class="excerpt">
+                Why the first number spoken in a negotiation determines the final outcome 90% of the time. How to set the trap.
+            </div>
+        </a>
+
+        <a href="human-os/eye-contact.html" class="case-file">
+            <div class="paper-clip"></div>
+            <span class="category-tag tag-human">Subject: Human_OS</span>
+            <h2>Excessive <span class="redacted">Gaze</span></h2>
+            <div class="excerpt">
+                Why forced eye contact is a sign of aggression or deception, not honesty. Decoding the "Stare Down".
+            </div>
+        </a>
+
+    </div>
+
+    <script>
+        // --- SEARCH DATABASE ---
+        // This ensures your search bar works instantly
+        const db = [
+            {t: "Eye Movement & Lying (Judas Signal)", u: "human-os/lying.html"},
+            {t: "Ben Franklin Effect", u: "social-eng/ben-franklin.html"},
+            {t: "Gaslighting Defense", u: "defense/gaslighting.html"},
+            {t: "The Halo Effect", u: "brain-hacks/halo-effect.html"},
+            {t: "Negotiation Anchoring", u: "social-eng/anchoring.html"},
+            {t: "Eye Contact Secrets", u: "human-os/eye-contact.html"}
+        ];
+
+        function search() {
+            let v = document.getElementById('s').value.toLowerCase();
+            let r = document.getElementById('results');
+            let h = "";
+            
+            if (v.length < 2) { r.style.display = 'none'; return; }
+            
+            let m = db.filter(x => x.t.toLowerCase().includes(v));
+            
+            if (m.length > 0) {
+                m.forEach(i => h += `<div class="res-row" onclick="location.href='${i.u}'">> ${i.t}</div>`);
+                r.innerHTML = h; r.style.display = 'block';
+            } else {
+                r.style.display = 'none';
+            }
+        }
+        
+        // Close search on click outside
+        document.addEventListener('click', function(e) {
+            if (!document.querySelector('.search-container').contains(e.target)) {
+                document.getElementById('results').style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+</html>
